@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>offset和position</title>
+        <style>
+            * {
+                margin: 0px;
+            }
+
+            .div1 {
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                top: 20px;
+                left: 10px;
+                background: blue;
+            }
+
+            .div2 {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                top: 50px;
+                background: red;
+            }
+
+            .div3 {
+                position: absolute;
+                top: 250px;
+            }
+        </style>
+    </head>
+    <body style="height: 2000px;">
+        <div class="div1">
+            <div class="div2">测试offset</div>
+        </div>
+        <div class="div3">
+            <button id="btn1">读取offset和position</button>
+            <button id="btn2">设置offset</button>
+        </div>
+        <!--
+            获取/设置标签的位置数据
+            - offset()：相对于页面左上角的坐标
+            - position()：相对于父元素左上角的位置
+        -->
+        <script type="text/javascript" src="./js/jquery-1.12.3.js"></script>
+        <script type="text/javascript">
+            /**
+             * 需求：
+             * 1. 点击btn1
+             *  打印div1相对于页面左上角的位置
+             *  打印div2相对于页面左上角的位置
+             *  打印div1相对于父元素左上角的位置
+             *  打印div2相对于父元素左上角的位置
+             * 2. 点击btn2
+             *  设置div2相对于页面的左上角的位置
+             */
+
+            var $div1 = $(".div1");
+            var $div2 = $(".div2");
+            // 1. 点击btn1
+            $("#btn1").click(function () {
+                // 打印div1相对于页面左上角的位置
+                console.log($div1.offset());
+                // 打印div2相对于页面左上角的位置
+                console.log($div2.offset())
+                // 打印div1相对于父元素左上角的位置
+                console.log($div1.position());
+                // 打印div2相对于父元素左上角的位置
+                console.log($div2.position());
+            });
+
+            // 2. 点击btn2
+            $("#btn2").click(function () {
+                // 设置div2相对于页面的左上角的位置
+                $div2.offset({
+                    left: 10,
+                    top: 0
+                });
+            });
+
+        </script>
+    </body>
+</html>
