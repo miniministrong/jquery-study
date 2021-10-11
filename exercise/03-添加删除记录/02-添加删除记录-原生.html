@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>添加删除记录-原生</title>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+    </head>
+    <body>
+        <table id="employeeTable">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <td>Tom</td>
+                <td>tom@tom.com</td>
+                <td>5000</td>
+                <td><a href="deleteEmp?id=001">Delete</a></td>
+            </tr>
+            <tr>
+                <td>Jerry</td>
+                <td>jerry@sohu.com</td>
+                <td>8000</td>
+                <td><a href="deleteEmp?id=002">Delete</a></td>
+            </tr>
+            <tr>
+                <td>Bob</td>
+                <td>bob@tom.com</td>
+                <td>10000</td>
+                <td><a href="deleteEmp?id=003">Delete</a></td>
+            </tr>
+
+        </table>
+
+        <div id="formDiv">
+
+            <h4>添加新员工</h4>
+
+            <table>
+                <tr>
+                    <td class="word">name:</td>
+                    <td class="inp">
+                        <input type="text" name="empName" id="empName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="word">email:</td>
+                    <td class="inp">
+                        <input type="text" name="email" id="email"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="word">salary:</td>
+                    <td class="inp">
+                        <input type="text" name="salary" id="salary"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button id="addEmpButton" value="abc">
+                            Submit
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script type="text/javascript">
+            /**
+             * 删除当前行
+             * @returns {boolean} 返回false是去除跳转功能
+             */
+            var deleteEmp = function () {
+                var tr = this.parentNode.parentNode;
+                var empname = tr.children[0].innerHTML;
+                if (confirm("你确定删除" + empname + "吗？")) {
+                    tr.parentNode.removeChild(tr);
+                }
+                return false;
+            };
+
+            var addEmpButton = document.getElementById("addEmpButton");
+            // 新增员工
+            // 获取数据
+            addEmpButton.onclick = function () {
+                var empName = document.getElementById("empName").value;
+                var email = document.getElementById("email").value;
+                var salary = document.getElementById("salary").value;
+
+                var tr = document.createElement("tr");
+
+                tr.innerHTML = "<td>" + empName + "</td>" +
+                               "<td>" + email + "</td>" +
+                               "<td>" + salary + "</td>" +
+                               "<td><a href='deleteEmp?id=" + Date.now() + "'>Delete</a></td>"
+                var a = tr.getElementsByTagName("a")[0];
+                a.onclick = deleteEmp;
+
+                var employeeTable = document.getElementById("employeeTable");
+                var tbody = document.getElementsByTagName("tbody")[0];
+                tbody.appendChild(tr);
+            };
+
+            var as = document.getElementsByTagName("a");
+            for (var i = 0; i < as.length; i++) {
+                as[i].onclick = deleteEmp;
+            }
+        </script>
+    </body>
+</html>
