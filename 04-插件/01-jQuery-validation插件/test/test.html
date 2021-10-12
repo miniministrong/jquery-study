@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>测试jQueryValidation插件</title>
+        <style>
+            .error{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="myForm" action="xxx">
+            <p>用户名(必须，最小6位)：<input name="username" type="text" required minlength="6"></p>
+            <p>密 码(必须，6到8位)：<input id="password" name="password" type="password" required minlength="6" maxlength="8"></p>
+            <p>确认密码（与密码相同）：<input name="enterPassword" type="password" equalTo="#password"></p>
+            <p><input type="submit" value="注册"></p>
+        </form>
+        <script type="text/javascript" src="./js/jquery-1.11.1.js"></script>
+        <script type="text/javascript" src="./js/jquery.validate.js"></script>
+        <script type="text/javascript">
+            /*
+                声明式验证：程序员只需要声明各种验证规则
+             */
+            // 对此表单开启验证
+            $("#myForm").validate({
+                messages: {
+                    username: {
+                        required: "用户名不能为空",
+                        minlength: "用户名至少为6位",
+                    },
+                    password: {
+                        required: "密码不能为空",
+                        minlength: "密码至少为6位",
+                        maxlength: "密码最多为8位"
+                    },
+                    enterPassword: {
+                        equalTo: "必须与密码相同"
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
